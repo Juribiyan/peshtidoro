@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Пештидоро</title>
+	<link rel="apple-touch-icon" sizes="180x180" href="fav/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="fav/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="fav/favicon-16x16.png">
+	<link rel="manifest" href="fav/site.webmanifest">
+	<link rel="stylesheet" href="/css/fonts/Yanone_Kaffeesatz.css">
+	<link rel="stylesheet" href="/css/peshtidoro.css">
+	<script src="/js/dom-utils.js"></script>
+	<script src="/js/peshtidoro.js" defer></script>
+</head>
+<body>
+	<h2>Peshtidoro</h2>
+	<div id="runner-shadow"></div>
+	<div id="main-container">
+		<div id="peshtidor">
+			<div id="peshtidor-shadow"></div>
+			<div id="peshtidor-image">
+				<img src="/img/peshtidor.png" alt="Пештидор">
+			</div>
+		</div>
+		<div id="clock-dial">
+			<div id="hour-hand" class="clock-hand"></div>
+			<div id="minute-hand" class="clock-hand"></div>
+			<div id="second-hand" class="clock-hand"></div>
+		</div>
+	</div>
+	<div id="digital-clock">
+		<span id="dc-hour"></span><span id="dc-colon">:</span><span id="dc-minute"></span>
+	</div>
+</body>
+</html>

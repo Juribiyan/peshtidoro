@@ -1,0 +1,202 @@
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Yanone Kaffeesatz';
+}
+:root {
+    --peshtidor-red: #f30;
+    --peshtidor-green: #0b0;
+    --creamy: #feb;
+    --runner-shade: #00000042;
+    --initial-angle: 0deg;
+    --rest-interval: calc(30 - var(--work-interval));
+    --work-deg: calc(var(--work-interval) * 6deg);
+    --rest-deg: calc(var(--rest-interval) * 6deg);
+    --cg-aa: .15deg; /* conic-gradien anti-aliasing */
+}
+body.idle-state {
+    background: var(--peshtidor-red);
+}
+body:not(.idle-state) {
+    background: conic-gradient(
+        from var(--initial-angle),
+        var(--peshtidor-red) var(--work-deg),
+        var(--peshtidor-green) calc(var(--work-deg) + var(--cg-aa)),
+        var(--peshtidor-green) 180deg,
+        var(--peshtidor-red) calc(180deg + var(--cg-aa)),
+        var(--peshtidor-red) calc(180deg + var(--work-deg)),
+        var(--peshtidor-green) calc(180deg + var(--work-deg) + var(--cg-aa)),
+        var(--peshtidor-green) calc(1turn - var(--cg-aa)),
+        var(--peshtidor-red)
+    );
+}
+#runner-shadow {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    --runner-angle: 0;
+    background: conic-gradient(
+        from calc(var(--initial-angle) - var(--cg-aa) / 2), 
+        var(--runner-shade) calc(var(--runner-angle) - var(--initial-angle)),
+        transparent calc(var(--runner-angle) - var(--initial-angle) + var(--cg-aa))
+    );
+    mix-blend-mode: darken;
+    opacity: 0;
+    pointer-events: none;
+}
+body:not(.idle-state) #runner-shadow {
+    opacity: 1;
+}
+#main-container {
+    z-index: 2;
+    position: relative;
+    width: 700px;
+    height: 700px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(closest-side, #00000073 0%, transparent 100%);
+}
+#peshtidor {
+    font-size: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    --roll-factor: 0;
+    --roll-t: calc(var(--roll-factor) * 1%);
+    --roll-r: calc(var(--roll-factor) * 1deg);
+    transform: translate(-50%, calc(-50% + -15px));
+    cursor: pointer;
+}
+#peshtidor-image {
+    transform: translate(var(--roll-t), 0) rotate(var(--roll-r));
+    transition: transform .15s;
+}
+
+#peshtidor img {
+    position: relative;
+    image-rendering: pixelated;
+}
+#peshtidor-image::after {
+    content: "";
+    position: absolute;
+    height: 53px;
+    top: 79px;
+    left: 0;
+    width: 100%;
+}
+.work-state #peshtidor-image::after,
+.rest-state #peshtidor-image::after {
+    background-image: url('/img/eye-states.png');
+    background-position-y: 0px;
+}
+.rest-state #peshtidor-image::after {
+    background-position-y: 53px;
+}
+#peshtidor-shadow {
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    translate: calc(-50% + var(--roll-t)) 0;
+    width: 110%;
+    height: 15%;
+    background: radial-gradient(closest-side, #00000099 0%, transparent 100%);
+    transition: transform .15s;
+}
+#clock-dial {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 90%;
+}
+.mark, .clock-hand {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+.mark {
+    rotate: calc(var(--mark-n) * 6deg);
+}
+.mark::after, .clock-hand::after {
+    content: '';
+    position: absolute;
+    background: var(--creamy);
+    translate: -50% 0;
+    box-shadow: 0 -2px 0 0 #00000030;
+}
+.mark::after {
+    height: 10px;
+    width: 2px;
+    left: 50%;
+    top: 0;
+    border-radius: 4px;
+    opacity: 0.8;
+    
+}
+.mark.fifteen-minute::after {
+    width: 6px;
+    height: 40px;
+}
+.mark.five-minute::after {
+    width: 4px;
+    height: 25px;
+}
+.clock-hand::after {
+    opacity: 0.85;
+}
+#hour-hand::after {
+    height: 12px;
+    width: 12px;
+    left: 50%;
+    top: 52px;
+    border-radius: 10px;
+}
+#minute-hand::after {
+    height: 10px;
+    width: 10px;
+    left: 50%;
+    top: -23px;
+    border-radius: 10px;
+}
+#second-hand::after {
+    height: 11px;
+    width: 2px;
+    left: 50%;
+    top: -46px;
+    border-radius: 10px;
+}
+#digital-clock {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 20px;
+    color: var(--creamy);
+    font-size: 66px;
+    letter-spacing: .033em;
+}
+#dc-hour, #dc-minute {
+    background: linear-gradient(var(--creamy), #ffeebb99 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#dc-colon {
+    opacity: 1;
+}
+.dc-colon-fade#dc-colon {
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+h2 {
+    position: absolute;
+    font-size: 4em;
+    color: var(--creamy);
+    opacity: .7;
+    text-align: center;
+    display: block;
+    width: 100%;
+    text-shadow: 0 2px 3px #00000091;
+    z-index: 1;
+}
