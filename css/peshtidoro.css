@@ -88,7 +88,7 @@ body:not(.idle-state) #runner-shadow {
 }
 .work-state #peshtidor-image::after,
 .rest-state #peshtidor-image::after {
-    background-image: url('/img/eye-states.png');
+    background-image: url('img/eye-states.png');
     background-position-y: 0px;
 }
 .rest-state #peshtidor-image::after {
