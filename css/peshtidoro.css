@@ -12,7 +12,7 @@ body {
     --rest-interval: calc(30 - var(--work-interval));
     --work-deg: calc(var(--work-interval) * 6deg);
     --rest-deg: calc(var(--rest-interval) * 6deg);
-    --cg-aa: .15deg; /* conic-gradien anti-aliasing */
+    --cg-aa: .15deg; /* conic-gradient anti-aliasing */
 }
 body.idle-state {
     background: var(--peshtidor-red);
@@ -88,7 +88,7 @@ body:not(.idle-state) #runner-shadow {
 }
 .work-state #peshtidor-image::after,
 .rest-state #peshtidor-image::after {
-    background-image: url('img/eye-states.png');
+    background-image: url('../img/eye-states.png');
     background-position-y: 0px;
 }
 .rest-state #peshtidor-image::after {
@@ -199,4 +199,45 @@ h2 {
     width: 100%;
     text-shadow: 0 2px 3px #00000091;
     z-index: 1;
+}
+
+#play-btn, #stop-btn {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    translate: -50% 30%;
+    transition: opacity .2s, scale .2s;
+    --button-size: 70px;
+    opacity: 0;
+}
+#play-btn {
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: calc(var(--button-size) / 2) 0 calc(var(--button-size) / 2) calc(var(--button-size) * .866);
+    border-color: transparent transparent transparent var(--creamy);
+    
+}
+#stop-btn {
+    width: var(--button-size);
+    height: var(--button-size);
+    background: var(--creamy);
+}
+#main-container:hover #play-btn,
+#main-container:hover #stop-btn {
+    opacity: .5;
+}
+#main-container:hover #stop-btn {
+    transition-delay: .5s;
+}
+#peshtidor:hover #play-btn,
+#peshtidor:hover #stop-btn{
+    scale: 1.2;
+    opacity: .8;
+    transition-delay: 0s!important;
+}
+body:not(.idle-state) #play-btn,
+body.idle-state #stop-btn {
+    display: none;
 }
