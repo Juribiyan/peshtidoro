@@ -1,7 +1,9 @@
 body {
     margin: 0;
     height: 100vh;
+    width: 100vw;
     font-family: 'Yanone Kaffeesatz';
+    overflow: hidden;
 }
 :root {
     --peshtidor-red: #f30;
@@ -13,6 +15,7 @@ body {
     --work-deg: calc(var(--work-interval) * 6deg);
     --rest-deg: calc(var(--rest-interval) * 6deg);
     --cg-aa: .15deg; /* conic-gradient anti-aliasing */
+    --container-size: min(700px, calc(100vw - 30px), calc(100vh - 30px));
 }
 body.idle-state {
     background: var(--peshtidor-red);
@@ -49,9 +52,8 @@ body:not(.idle-state) #runner-shadow {
 }
 #main-container {
     z-index: 2;
-    position: relative;
-    width: 700px;
-    height: 700px;
+    width: var(--container-size);
+    height: var(--container-size);
     position: absolute;
     left: 50%;
     top: 50%;
@@ -75,14 +77,15 @@ body:not(.idle-state) #runner-shadow {
 }
 
 #peshtidor img {
+    width: min(100%, calc(var(--container-size)));
     position: relative;
     image-rendering: pixelated;
 }
 #peshtidor-image::after {
     content: "";
     position: absolute;
-    height: 53px;
-    top: 79px;
+    height: 16.3%;
+    top: 24.3%;
     left: 0;
     width: 100%;
 }
@@ -90,6 +93,7 @@ body:not(.idle-state) #runner-shadow {
 .rest-state #peshtidor-image::after {
     background-image: url('../img/eye-states.png');
     background-position-y: 0px;
+    background-size: 100%;
 }
 .rest-state #peshtidor-image::after {
     background-position-y: 53px;
@@ -208,7 +212,7 @@ h2 {
     z-index: 2;
     translate: -50% 30%;
     transition: opacity .2s, scale .2s;
-    --button-size: 70px;
+    --button-size: calc(var(--container-size) * .1);
     opacity: 0;
 }
 #play-btn {
@@ -217,7 +221,6 @@ h2 {
     border-style: solid;
     border-width: calc(var(--button-size) / 2) 0 calc(var(--button-size) / 2) calc(var(--button-size) * .866);
     border-color: transparent transparent transparent var(--creamy);
-    
 }
 #stop-btn {
     width: var(--button-size);

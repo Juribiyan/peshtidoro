@@ -25,7 +25,7 @@ const Timer = {
 		, timeLeftToFullSecond = 1000 - now.getMilliseconds()
 		setTimeout(() => {
 			this.tick()
-			setInterval(() => this.tick(), 1000)
+			this.tickInterval = setInterval(() => this.tick(), 1000)
 		}, timeLeftToFullSecond)
 	},
 	notificationsEnabled: false,
@@ -87,6 +87,10 @@ const Timer = {
 	},
 	stop: async function() {
 		this.state = 'idle'
+	},
+	fullStop: function() {
+		// for debugging
+		clearInterval(this.tickInterval)
 	},
 	updateRunner: function(now) {
 		let deg = time2deg(now, 'min')
