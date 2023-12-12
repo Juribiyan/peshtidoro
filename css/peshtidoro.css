@@ -38,9 +38,11 @@ body:not(.idle-state) {
 }
 #runner-shadow {
     position: absolute;
+    left: 0;
+    top: 0;
     height: 100vh;
-    height: 100vh;
-    width: 100dvw;
+    height: 100dvh;
+    width: 100vw;
     width: 100dvw;
     --runner-angle: 0;
     background: conic-gradient(
