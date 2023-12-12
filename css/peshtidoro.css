@@ -1,7 +1,9 @@
 body {
     margin: 0;
     height: 100vh;
+    height: 100dvh;
     width: 100vw;
+    width: 100dvw;
     font-family: 'Yanone Kaffeesatz';
     overflow: hidden;
 }
@@ -15,7 +17,8 @@ body {
     --work-deg: calc(var(--work-interval) * 6deg);
     --rest-deg: calc(var(--rest-interval) * 6deg);
     --cg-aa: .15deg; /* conic-gradient anti-aliasing */
-    --container-size: min(700px, calc(100vw - 30px), calc(100vh - 30px));
+    --container-size: min(700px, calc(100vmin - 30px));
+    --container-size: min(700px, calc(100dvmin - 30px));
 }
 body.idle-state {
     background: var(--peshtidor-red);
