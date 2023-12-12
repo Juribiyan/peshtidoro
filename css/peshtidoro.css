@@ -103,7 +103,7 @@ body:not(.idle-state) #runner-shadow {
     background-size: 100%;
 }
 .rest-state #peshtidor-image::after {
-    background-position-y: 53px;
+    background-position-y: 100%;
 }
 #peshtidor-shadow {
     position: absolute;
